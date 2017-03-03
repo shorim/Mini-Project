@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../CSS/favicon.ico">
+
+    <title>Home</title>
+
+     <!-- Bootstrap core CSS -->
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../CSS/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../CSS/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../Javascript/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+  
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/">Home</a></li>
+        <li role="presentation"><a href="/myPortofolioRouter">My Portofolio</a></li>
+        <li role="presentation"><a href="/portofolioRouter">Create Portofolio</a></li>
+        <% if(locals.user){ %>
+            <li role="presentation"><a href="/homeRouter/logout">Log Out</a></li>
+        <% }
+        else { %>
+            <li role="presentation"><a href="/loginRouter">Log In</a></li>
+        <% } %>
+    </ul>
+
+    <br>
+    <div class="container">
+      <h1>Portofolios Summary</h1>
+      <br><br>
+
+      <% if(totalPortofolios==0){  %>
+         
+         <h4> No portofolios are available. </h4>
+         <% } 
+         else { %>
+      <% portofolios.forEach( function( portofolio ) { %>
+
+        <% var work=portofolio.work; %>
+        <div class="row">
+
+            <div class="col-md-2" style="text-align: right;" >
+                <% if(portofolio.profilePic==undefined) { %>
+                <img src="profileDefault.jpg" style="width:128px;height:128px;border-radius: 50%;">
+                <% } 
+                else { %>
+                <img src="<%= portofolio.profilePic %>" style="width:128px;height:128px;border-radius: 50%;">
+                <% } %>
+            </div>
+
+            <div class="col-md-2" style="text-align: left;" >
+                <p> <b>Name:</b> </p>
+                <p> <%= portofolio.getName() %> </p> 
+                <p> <b>Description:</b> </p>
+                <% if(portofolio.description=="") { %>
+                <p> <i>Not Available</i> </p>
+                <% } else{ %>
+                <p> <%= portofolio.description %> </p>
+                <% } %>
+            </div>
+
+            <div class="col-md-2" style="text-align: right;" >
+                
+                <% if(work[0].screenshot==undefined) { %>
+                <img src="screenshotDefault.png" style="width:128px;height:128px;border-radius: 50%;">
+                <% } 
+                else { %>
+                <img src="<%= work[0].screenshot %>" style="width:128px;height:128px;border-radius: 50%;">
+                <% } %>
+            </div>
+
+            <div class="col-md-2" style="text-align: left;" >
+
+                <b>Title: </b> <br>
+                <% if(work[0].title=="") { %>
+                <i>Not Available</i> <br>
+                <% } else { %>
+                <%= work[0].title %> <br>
+                <% } %>
+
+                <b>Link: </b> <br>
+                <% if(work[0].link=="") { %>
+                <i>Not Available</i> <br>
+                <% } else { %>
+                <a href=" <%= work[0].link %> "><%= work[0].link %></a> <br>
+                <% } %>                
+                
+                <b>Repo: </b> <br>
+                <% if(work[0].repo=="") { %>
+                <i>Not Available</i> 
+                <% } else { %>
+                <a href="<%= work[0].repo %>"><%= work[0].repo %></a> 
+                <% } %>  
+                
+            </div>
+
+            <% if( work.length > 1) { %>
+
+            <div class="col-md-2" style="text-align: right;" >
+                <% if(work[1].screenshot==undefined) { %>
+                <img src="screenshotDefault.png" style="width:128px;height:128px;border-radius: 50%;">
+                <% } 
+                else { %>
+                <img src="<%= work[1].screenshot %>" style="width:128px;height:128px;border-radius: 50%;">
+                <% } %>
+            </div>
+
+            <div class="col-md-2" style="text-align: left;" >
+
+                <b>Title: </b> <br>
+                <% if(work[1].title=="") { %>
+                <i>Not Available</i> <br>
+                <% } else { %>
+                <%= work[1].title %> <br>
+                <% } %>
+
+                <b>Link: </b> <br>
+                <% if(work[1].link=="") { %>
+                <i>Not Available</i> <br>
+                <% } else { %>
+                <a href=" <%= work[1].link %> "><%= work[1].link %></a> <br>
+                <% } %>                
+                
+                <b>Repo: </b> <br>
+                <% if(work[1].repo=="") { %>
+                <i>Not Available</i> 
+                <% } else { %>
+                <a href="<%= work[1].repo %>"><%= work[1].repo %></a> 
+                <% } %>
+
+            </div>
+
+            <% } %>
+          
+        </div>
+
+        <br><br>
+        
+      <% }) %>
+
+      <% } %>
+
+    <% if (pageCount > 1) { %>
+          <ul class="pagination">
+              <% if (currentPage > 1) { %>
+                  <li><a href="/?page=1">&laquo;</a></li>
+              <% } %>
+              <% var i = 1;
+              if (currentPage > 5) {
+                  i = +currentPage - 4;
+              } %>
+              <% if (i !== 1) { %>
+                  <li class="disabled"><a href="#">...</a></li>
+              <% } %>
+              <% for (i; i<=pageCount; i++) { %>
+                  <% if (currentPage == i) { %>
+                      <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+                  <% } else { %>
+                      <li><a href="/?page=<%= i %>"><%= i %></a></li>
+                  <% } %>
+                  <% if (i == (+currentPage + 4)) { %>
+                      <li class="disabled"><a href="#">...</a></li>
+                  <% break; } %>
+              <% } %>
+              <% if (currentPage != pageCount) { %>
+                  <li><a href="/?page=<%= pageCount %>">&raquo;</a></li>
+              <% } %>
+          </ul>
+      <% } %>
+
+  </div>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../Javascript/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

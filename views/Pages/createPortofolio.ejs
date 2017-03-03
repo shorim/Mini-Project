@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../CSS/favicon.ico">
+
+    <title>Creating a Portofolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../CSS/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../CSS/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../Javascript/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/homeRouter">Home</a></li>
+    </ul>
+
+    <div class="container">
+
+      <form class="form-signin" enctype="multipart/form-data" action="/portofolioRouter/addWork" method="post">
+        <h2 class="form-signin-heading">Add Your Work </h2>
+        <br>
+        <p style="font-size:20px">Screenshot:</p>
+        <label for="inputScreenshot" class="sr-only">Screenshot</label>
+        <input name="screenshot" type="file" id="inputScreenShot" class="form-control" placeholder="Screenshot" >
+        <br>
+        <label for="inputTitle" class="sr-only">Title</label>
+        <input name="title" type="text" id="inputTitle" class="form-control" placeholder="Title" autofocus>
+        <br>
+        <label for="inputLink" class="sr-only">Link</label>
+        <input name="link" type="url" id="inputLink" class="form-control" placeholder="Link" required>
+        <br>
+        <label for="inputRepo" class="sr-only">Code Repo</label>
+        <input name="repo" type="url" id="inputRepo" class="form-control" placeholder="Code Repo" >
+
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">add work</button>
+        <br>
+        <% if(locals.workMessage){ %>
+            <p style="font-size:20px"><%= workMessage %></p>
+        <% } %>
+
+      </form>
+
+      <br>
+
+      <form class="form-signin" enctype="multipart/form-data" action="/portofolioRouter/create" method="post">
+        <h2 class="form-signin-heading">Personal Information</h2>
+        <br>
+        <p style="font-size:20px">Profile Picture:</p>
+        <label for="inputprofilePic" class="sr-only">Profile Picture</label>
+        <input name="profilePic" type="file" id="inputprofilePic" class="form-control" placeholder="Profile Picture" >
+        <br>
+        <label for="inputfirstName" class="sr-only">First Name</label>
+        <input name="firstName" type="text" id="inputfirstName" class="form-control" placeholder="First Name" required autofocus >
+        <br>
+        <label for="inputlastName" class="sr-only">Last Name</label>
+        <input name="lastName" type="text" id="inputlastName" class="form-control" placeholder="Last Name" required >
+        <br>
+        <label for="inputdescription" class="sr-only">Screenshot</label>
+        <input name="description" type="text" id="inputdescription" class="form-control" placeholder="Description" >
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Portofolio</button>
+        <br>
+        <% if(locals.portofolioMessage){ %>
+            <p style="font-size:20px"><%= portofolioMessage %></p>
+        <% } %>
+
+      </form>
+
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../Javascript/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

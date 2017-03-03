@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../CSS/favicon.ico">
+
+    <title>My Portofolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../CSS/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../CSS/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../Javascript/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/homeRouter">Home</a></li>
+        <li role="presentation"><a href="/addWorkRouter">Add Work</a></li>
+    </ul>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-6" style="text-align: right;" >
+                <% if(portofolio.profilePic==undefined) { %>
+                <img src="profileDefault.jpg" style="width:128px;height:128px;border-radius: 50%;">
+                <% } 
+                else { %>
+                <img src="<%= portofolio.profilePic %>" style="width:128px;height:128px;border-radius: 50%;">
+                <% } %>
+            </div>
+            <div class="col-md-6" style="text-align: left; font-size: large">
+                <p> <b>Name:</b> <%= portofolio.getName() %> </p>
+                <% if( portofolio.description=="") { %>
+                <p> <b>Description:</b> <i>Not Available</i> </p>
+                <% }
+                else { %>
+                <p> <b>Description:</b> <%= portofolio.description %> </p>
+                <% } %>
+            </div>     
+        </div>
+        <br><br><br><br>
+
+        <% portofolio.work.forEach(function(work) { %>
+        <div class="row" >
+            <div class="col-md-6" style="text-align: right;" >
+                <% if(work.screenshot==undefined) { %>
+                <img src="screenshotDefault.png" style="width:128px;height:128px;border-radius: 50%;">
+                <% } 
+                else { %>
+                <img src="<%= work.screenshot %>" style="width:128px;height:128px;border-radius: 50%;">
+                <% } %>
+            </div>
+            <div class="col-md-6" style="text-align: left;font-size: large">
+                <% if(work.title==""){ %>
+                <p> <b>Title: </b> <i>Not Available</i> <br> </p>
+                <% } else { %>
+                <p> <b>Title: </b> <%= work.title %> <br> </p>
+                <% } %>
+
+                <% if(work.link==""){ %>
+                <p> <b>Link: </b> <i>Not Available</i> </p>
+                <% } else { %>
+                <p> <b>Link: </b> <a href="<%= work.link %>"><%= work.link %></a> </p> 
+                <% } %>
+
+                <% if(work.repo==""){ %>
+                <p> <b>Repo: </b> <i>Not Available</i> </p>
+                <% } else { %>
+                <p> <b>Repo: </b> <a href="<%= work.repo %>"><%= work.repo %></a> </p>
+                <% } %>
+            
+            </div>      
+        </div>
+        <br><br>
+        <% }); %>
+    </div>
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../Javascript/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
